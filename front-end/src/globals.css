@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Arizonia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stalemate&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -117,4 +120,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.font-arizonia {
+  font-family: "Arizonia", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-stalemate {
+  font-family: "Stalemate", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
