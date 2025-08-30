@@ -2,11 +2,13 @@ import React from 'react';
 import { storyData } from '@/data/story';
 import { Header } from '../layouts/Header';
 import { Footer } from '../layouts/Footer';
+import { MovingCard } from '../utils/MovingCard';
+import { EndlessCarousel } from '../utils/EndlessCarousel';
 
 // Type definitions
 interface Story {
   text: string;
-  imageId: number;
+  imageId: string;
 }
 
 interface Section {
@@ -31,6 +33,7 @@ interface StoryItemProps {
 
 interface StorySectionProps {
   section: Section;
+  children?: React.ReactNode;
 }
 
 interface ChapterProps {
@@ -45,19 +48,12 @@ const StoryItem: React.FC<StoryItemProps> = ({ story, textColor, isEven }) => {
       {/* Image */}
       <div className="flex-shrink-0">
         <div className="w-80 h-60 rounded-2xl shadow-lg bg-white/50 border-4 border-white/80 flex items-center justify-center overflow-hidden">
-          {/* Replace this div with your actual image */}
-          <div className={`${textColor} text-center p-4`}>
-            <div className="text-4xl mb-2">📷</div>
-            <div className="text-sm opacity-75">Photo {story.imageId}</div>
-            <div className="text-xs mt-1 opacity-60">Replace with actual image</div>
-          </div>
-          {/* When you have actual images, use this instead:
           <img 
-            src={`your-image-path-${story.imageId}.jpg`} 
+            src={`${story.imageId}`} 
             alt={`Story moment ${story.imageId}`}
             className="w-full h-full object-cover"
           />
-          */}
+         
         </div>
       </div>
       
@@ -72,7 +68,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ story, textColor, isEven }) => {
 };
 
 // Section Component
-const StorySection: React.FC<StorySectionProps> = ({ section }) => {
+const StorySection: React.FC<StorySectionProps> = ({ section, children }) => {
   return (
     <section className={`${section.bgColor} py-16 px-6`}>
       <div className="max-w-6xl mx-auto">
@@ -95,6 +91,7 @@ const StorySection: React.FC<StorySectionProps> = ({ section }) => {
             />
           ))}
         </div>
+		{children && <div className="mt-8">{children}</div>}
       </div>
     </section>
   );
@@ -130,6 +127,104 @@ const Chapter: React.FC<ChapterProps> = ({ chapter, chapterNumber }) => {
   );
 };
 
+const Chapter3: React.FC<ChapterProps> = ({ chapter, chapterNumber }) => {
+  return (
+    <div >
+      {/* Chapter Header */}
+      <div className="bg-gray-900 text-white py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-6">
+            <div className="p-4 bg-white/10 rounded-full">
+              {chapter.icon}
+            </div>
+          </div>
+          <h2 className="text-5xl font-bold mb-6">
+            Chapter {chapterNumber}
+          </h2>
+          <h3 className="text-4xl font-light opacity-90">
+            {chapter.title}
+          </h3>
+          <div className="w-32 h-1 bg-white/30 mx-auto mt-6"></div>
+        </div>
+      </div>
+      
+      {/* Chapter Sections */}
+      {chapter.sections.map((section: Section, index: number) => (
+        <StorySection key={index} section={section} />
+      ))}
+    </div>
+  );
+};
+
+const Chapter2: React.FC<ChapterProps> = ({ chapter, chapterNumber }) => {
+
+	const sectionsPart = chapter.sections.slice(0, 2);
+	const finalSection = chapter.sections[2];
+  return (
+    <div >
+      {/* Chapter Header */}
+      <div className="bg-gray-900 text-white py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-6">
+            <div className="p-4 bg-white/10 rounded-full">
+              {chapter.icon}
+            </div>
+          </div>
+          <h2 className="text-5xl font-bold mb-6">
+            Chapter {chapterNumber}
+          </h2>
+          <h3 className="text-4xl font-light opacity-90">
+            {chapter.title}
+          </h3>
+          <div className="w-32 h-1 bg-white/30 mx-auto mt-6"></div>
+        </div>
+      </div>
+      
+      {/* Chapter Sections */}
+      {sectionsPart.map((section: Section, index: number) => (
+        <StorySection key={index} section={section} />
+      ))}
+	  <StorySection section={finalSection}>
+		<EndlessCarousel />
+	  </StorySection>
+    </div>
+  );
+};
+
+const Chapter1: React.FC<ChapterProps> = ({ chapter, chapterNumber }) => {
+	const sectionsPart = chapter.sections.slice(0, 2);
+	const finalSection = chapter.sections[2];
+  return (
+    <div >
+      {/* Chapter Header */}
+      <div className="bg-gray-900 text-white py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex items-center justify-center mb-6">
+            <div className="p-4 bg-white/10 rounded-full">
+              {chapter.icon}
+            </div>
+          </div>
+          <h2 className="text-5xl font-bold mb-6">
+            Chapter {chapterNumber}
+          </h2>
+          <h3 className="text-4xl font-light opacity-90">
+            {chapter.title}
+          </h3>
+          <div className="w-32 h-1 bg-white/30 mx-auto mt-6"></div>
+        </div>
+      </div>
+      
+      {/* Chapter Sections */}
+      {sectionsPart.map((section: Section, index: number) => (
+        <StorySection key={index} section={section} />
+      ))}
+	  <StorySection section={finalSection}>
+		<MovingCard />
+	  </StorySection>
+    </div>
+  );
+};
+
 // Main App Component
 export const LoveStoryWebsite: React.FC = () => {
   return (
@@ -139,9 +234,9 @@ export const LoveStoryWebsite: React.FC = () => {
 
       {/* Story Chapters */}
       <main>
-        <Chapter chapter={storyData.chapter1} chapterNumber={1} />
-        <Chapter chapter={storyData.chapter2} chapterNumber={2} />
-        <Chapter chapter={storyData.chapter3} chapterNumber={3} />
+        <Chapter1 chapter={storyData.chapter1} chapterNumber={1} />
+        <Chapter2 chapter={storyData.chapter2} chapterNumber={2} />
+        <Chapter3 chapter={storyData.chapter3} chapterNumber={3} />
       </main>
 
       {/* Footer */}
