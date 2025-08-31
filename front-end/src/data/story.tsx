@@ -133,7 +133,7 @@ export const storyData: StoryData = {
       {
         title: "A Promise in Bangkok",
         stories: [
-          { text: "They met again in Bangkok, where they made a promise.", imageId: "images/CoupleJourney/chapter3_4.jpg" },
+          { text: "After a year, they met again in Bangkok, where they made a promise.", imageId: "images/CoupleJourney/chapter3_4.jpg" },
           { text: "One day, they will live and work side by side.", imageId: "images/CoupleJourney/chapter3_12.jpg" },
           { text: "As professionals, as partners in life.", imageId: "images/CoupleJourney/chapter3_11.JPG" },
           { text: "But for now, they endure.", imageId: "images/CoupleJourney/chapter3_6.jpg" },

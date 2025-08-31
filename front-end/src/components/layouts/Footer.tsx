@@ -1,5 +1,3 @@
-import { Heart } from 'lucide-react';
-
 export function Footer() {
 	return (
 		<footer className="bg-gray-800 text-white py-16 px-6">

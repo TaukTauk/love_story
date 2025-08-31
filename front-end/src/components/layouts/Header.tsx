@@ -1,5 +1,3 @@
-import { Heart } from 'lucide-react';
-
 export function Header() {
   return (
 	<header className="relative h-100 w-full flex items-center justify-center overflow-hidden">

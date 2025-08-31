@@ -59,7 +59,7 @@ const StoryItem: React.FC<StoryItemProps> = ({ story, textColor, isEven }) => {
       
       {/* Text */}
       <div className="flex-1">
-        <p className={`text-5xl leading-relaxed ${textColor} `}>
+        <p className={`text-5xl leading-relaxed ${textColor} ${isEven ? 'text-right' : 'text-left'} max-lg:text-center`}>
           {story.text}
         </p>
       </div>
